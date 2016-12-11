@@ -2,7 +2,9 @@
 title: "Galaxy Zoo Competition"
 author: Matthew Emery
 date: December 15, 2016
-output: revealjs::revealjs_presentation
+output: 
+  revealjs::revealjs_presentation:
+    theme: "night"
 ---
 
 # What Is Galaxy Zoo?
@@ -43,7 +45,7 @@ output: revealjs::revealjs_presentation
 - The answers to the first question should sum to 1
 - Answers to the next questions to sum to their parent probability
 
-$$RMSE = {\sqrt {{\sum\limits_{k = 1}^{37} {(\hat{p_{k}} - p_{k} } })^{2} } } $$
+![Example Galaxy](../img/RMSE.png)
 
 - Note: We are measuring error against the what the crowd answered. A "good" model will have the same biases as the crowd
 
@@ -53,7 +55,6 @@ $$RMSE = {\sqrt {{\sum\limits_{k = 1}^{37} {(\hat{p_{k}} - p_{k} } })^{2} } } $$
 
 ## 1st Place: Sander Dieleman
 
-- He's really, really good
 - Also won first place in the 2014 National Data Science Bowl with a team
 - His approach was novel enough to get a paper in MNRAS and a job at DeepMind
 - Co-author of Lasagne
@@ -70,11 +71,14 @@ $$RMSE = {\sqrt {{\sum\limits_{k = 1}^{37} {(\hat{p_{k}} - p_{k} } })^{2} } } $$
 ---
 
 - Avoided cropping out the object interest by centering with SExtractor (Source Extractor)
-![SExtractor](../img/sextractor.png)
+
+<img class="center" src="../img/sextractor.png">
+
 
 ## Data Augmentation
 
 ![Data Augmentation](../img/data_augmentation.png)
+ 
  - Rotating uniformly from 0 to 360
  - Translating uniformly -4 pixels to 4 pixels
  - Scaling log-uniformly from 1.3^-1 to 1.3
@@ -113,7 +117,9 @@ $$RMSE = {\sqrt {{\sum\limits_{k = 1}^{37} {(\hat{p_{k}} - p_{k} } })^{2} } } $$
 
 ## How Did He Do?
 
+![Example Galaxy](../img/galaxyzoo_results.png)
 
+- His single best network outperformed everything else
 
 # Convolutional Neural Nets
 
