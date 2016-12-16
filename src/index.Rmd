@@ -1,7 +1,7 @@
 ---
 title: "Galaxy Zoo Competition"
 author: Matthew Emery
-date: December 15, 2016
+date: https://lstmemery.github.io/kaggle-galaxy-presentation/#/
 output: 
   revealjs::revealjs_presentation:
     theme: "night"
@@ -111,10 +111,27 @@ output:
 - Maxout are like group-wise ReLUs
 - The 37 were scaled to their constraints
 
+## Variants
+
+- a network with two dense layers instead of three (just one maxout layer);
+- a network with one of the dense layers reduced in size and applied individually to each part (resulting in 16-way parameter sharing for this layer as well);
+- a network with a different filter size configuration: 8/4/3/3 instead of 6/5/3/3 (from bottom to top);
+- a network with centered and rescaled input images;
+- a network with a ReLU dense layer instead of maxout;
+- a network with 192 filters instead of 128 for the topmost convolutional layer;
+- a network with 256 filters instead of 128 for the topmost convolutional layer;
+- a network with norm constraint regularisation applied to the two maxout layers;
+- combinations of the above variations.
+
+
+<aside class="notes">
+  The Norm Constrain regularisation was suggested in a Hinton paper from 2012
+</aside>
+
 ## Training
 
 - 67(?) hours of training for the best model on a GTX 680
-- Nesterov Momentum was used
+- Nesterov Momentum was used (16 "minibatches," effectively 256 because of architecture)
 - Learning rate of 0.04 (updated to 0.004 after 18M samples, then 0.0004 after 23M)
 - Dropout was used during training to prevent overfitting
 
@@ -133,8 +150,23 @@ output:
 
 - His single best network outperformed everything else
 
+## Things that Didn't Work
+
+- Adding Gaussian Noise to the image
+- Changing gamma
+- Downsampling less
+- Adding shearing to preprocessing
+- RMSprop or adadelta
+
+<aside class="notes">
+  Attempted to shift to a polar coordinate system but didn't have enough time.
+</aside>
+
 # References
+
+---
 
 1. I. Goodfellow, Y. Bengio, and A. Courville, Deep learning. 2016.
 2. S. Dieleman, K. W. Willett, and J. Dambre, “Rotation-invariant convolutional neural networks for galaxy morphology prediction,” Monthly Notices of the Royal Astronomical Society, vol. 450, no. 2, pp. 1441–1459, Apr. 2015.
+3. [1]“benanne/kaggle-galaxies,” GitHub. [Online]. Available: https://github.com/benanne/kaggle-galaxies. [Accessed: 16-Dec-2016].
 

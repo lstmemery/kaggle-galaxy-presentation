@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Matthew Emery" />
+  <title>Galaxy Zoo Competition</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="index_files/reveal.js-3.3.0/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="index_files/reveal.js-3.3.0/css/theme/night.css" id="theme">
+
+<style type="text/css">
+.reveal section img {
+  background: rgba(255, 255, 255, 0.85);
+}
+</style>
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'index_files/reveal.js-3.3.0/css/print/pdf.css' : 'index_files/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="index_files/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Galaxy Zoo Competition</h1>
+    <h2 class="author">Matthew Emery</h2>
+    <h3 class="date"><a href="https://lstmemery.github.io/kaggle-galaxy-presentation/#/" class="uri">https://lstmemery.github.io/kaggle-galaxy-presentation/#/</a></h3>
+</section>
+
+<section><section id="what-is-galaxy-zoo" class="titleslide slide level1"><h1>What Is Galaxy Zoo?</h1></section><section class="slide level2">
+
+<ul>
+<li>All sky galaxy surveys produce more images than can be handled just by experts</li>
+<li>It’s 2011, better crowd-source it</li>
+</ul>
+<p><img src="/home/memery/Documents/kaggle/galaxyzoo_presentation/galaxyzoo/img/GalaxyZoo.jpg" alt="Galaxy Zoo Snapshot" /></p>
+<aside class="notes">
+The site is currently down for maintenance
+</aside>
+</section><section id="galaxy-classification" class="slide level2">
+<h1>Galaxy Classification</h1>
+<ul>
+<li>Over 900000 galaxies classified in a few months</li>
+<li>37 categories arrived at by asking 11 questions</li>
+<li>After 40-50 users see a galaxy, the answers are aggregated and weighted vote fractions in the decision tree</li>
+</ul>
+</section><section class="slide level2">
+
+<p><img src="/home/memery/Documents/kaggle/galaxyzoo_presentation/galaxyzoo/img/galaxy_decision_tree.png" alt="Galaxy Zoo Decision Tree" /></p>
+</section></section>
+<section><section id="competition-details" class="titleslide slide level1"><h1>Competition Details</h1></section><section id="specifications" class="slide level2">
+<h1>Specifications</h1>
+<ul>
+<li>Ran from December 20th, 2013 to April 4th, 2014</li>
+<li>61,578 training images with vote fractions</li>
+<li>79,975 test images</li>
+<li>424 x 424 pixels</li>
+<li>Prize of $16,000</li>
+</ul>
+<p><img src="/home/memery/Documents/kaggle/galaxyzoo_presentation/galaxyzoo/img/262642.jpg" alt="Example Galaxy" /></p>
+</section><section id="loss-function" class="slide level2">
+<h1>Loss Function</h1>
+<ul>
+<li>This is a regression problem!</li>
+<li>The answers to the first question should sum to 1</li>
+<li>Answers to the next questions to sum to their parent probability</li>
+</ul>
+<p><img src="/home/memery/Documents/kaggle/galaxyzoo_presentation/galaxyzoo/img/RMSE.png" alt="Example Galaxy" /></p>
+<ul>
+<li>Note: We are measuring error against the what the crowd answered. A “good” model will have the same biases as the crowd</li>
+</ul>
+</section></section>
+<section><section id="the-winning-solution" class="titleslide slide level1"><h1>The Winning Solution</h1></section><section id="st-place-sander-dieleman" class="slide level2">
+<h1>1st Place: Sander Dieleman</h1>
+<ul>
+<li>Also won first place in the 2014 National Data Science Bowl with a team</li>
+<li>His approach was novel enough to get a paper in MNRAS and a job at DeepMind</li>
+<li>Co-author of Lasagne</li>
+<li>Second author on WaveNet, also on AlphaGo</li>
+</ul>
+</section><section id="preprocessing" class="slide level2">
+<h1>Preprocessing</h1>
+<ul>
+<li>Cropped 424x424 to 207x207</li>
+<li>Downscaled to 3x to 69x69</li>
+<li>Centering was done by Petrosian radius</li>
+<li>Normalized in some images but not others</li>
+<li>Keeping color significantly improved the model, despite it being artificial</li>
+</ul>
+</section><section class="slide level2">
+
+<ul>
+<li>Avoided cropping out the object interest by centering with SExtractor (Source Extractor)</li>
+</ul>
+<p><img class="center" src="../img/sextractor.png"></p>
+</section><section id="data-augmentation" class="slide level2">
+<h1>Data Augmentation</h1>
+<p><img src="/home/memery/Documents/kaggle/galaxyzoo_presentation/galaxyzoo/img/data_augmentation.png" alt="Data Augmentation" /></p>
+<ul>
+<li>Rotating uniformly from 0 to 360</li>
+<li>Translating uniformly -4 pixels to 4 pixels</li>
+<li>Scaling log-uniformly from 1.3^-1 to 1.3</li>
+<li>Flip as a Bernoulli event with probability 0.5</li>
+<li>Color perturbation using an equation in the ImageNet paper</li>
+<li>This is all being done on the CPU while the GPU trains the network</li>
+</ul>
+</section><section id="rotational-invariance" class="slide level2">
+<h1>Rotational Invariance</h1>
+<p>
+<img align="left" alt="Data Augmentation" src="../img/viewpoint_extraction.png" height="40%" width="40%"> Step 1: Rotate image 45 degrees and flip both images (4 images)<br><br> Step 2: Crop each 67x67 image into 4 overlapping 45x45 images (4x4=16 images)
+</p>
+</section></section>
+<section><section id="network-architectures" class="titleslide slide level1"><h1>Network Architectures</h1></section><section id="best-model" class="slide level2">
+<h1>Best Model</h1>
+<p><img src="/home/memery/Documents/kaggle/galaxyzoo_presentation/galaxyzoo/img/architecture.png" alt="Best Architecture" height="70%" width="70%"></p>
+<ul>
+<li>All 16 viewpoints are fed in at the same time to maximize parameter sharing</li>
+<li>Best single model has 4 square convolutional layers (6-5-3-3)</li>
+<li>More than 100 models were tested, 17 were included in the final ensemble</li>
+<li>Maxout are like group-wise ReLUs</li>
+<li>The 37 were scaled to their constraints</li>
+</ul>
+</section><section id="variants" class="slide level2">
+<h1>Variants</h1>
+<ul>
+<li>a network with two dense layers instead of three (just one maxout layer);</li>
+<li>a network with one of the dense layers reduced in size and applied individually to each part (resulting in 16-way parameter sharing for this layer as well);</li>
+<li>a network with a different filter size configuration: 8/4/3/3 instead of 6/5/3/3 (from bottom to top);</li>
+<li>a network with centered and rescaled input images;</li>
+<li>a network with a ReLU dense layer instead of maxout;</li>
+<li>a network with 192 filters instead of 128 for the topmost convolutional layer;</li>
+<li>a network with 256 filters instead of 128 for the topmost convolutional layer;</li>
+<li>a network with norm constraint regularisation applied to the two maxout layers;</li>
+<li>combinations of the above variations.</li>
+</ul>
+<aside class="notes">
+The Norm Constrain regularisation was suggested in a Hinton paper from 2012
+</aside>
+</section><section id="training" class="slide level2">
+<h1>Training</h1>
+<ul>
+<li>67(?) hours of training for the best model on a GTX 680</li>
+<li>Nesterov Momentum was used (16 “minibatches,” effectively 256 because of architecture)</li>
+<li>Learning rate of 0.04 (updated to 0.004 after 18M samples, then 0.0004 after 23M)</li>
+<li>Dropout was used during training to prevent overfitting</li>
+</ul>
+<p><img src="/home/memery/Documents/kaggle/galaxyzoo_presentation/galaxyzoo/img/opt2.gif" alt="Momentum" /></p>
+</section><section id="model-averaging" class="slide level2">
+<h1>Model Averaging</h1>
+<ul>
+<li>Modeled across 17 architectures (they are all available on GitHub)</li>
+<li>For each model, averaged predictions across 60 different transforms</li>
+<li>10 rotations x 3 rescalings x 2 reflections</li>
+<li>It takes 4 hours to get a prediction from a single model</li>
+</ul>
+</section><section id="how-did-he-do" class="slide level2">
+<h1>How Did He Do?</h1>
+<p><img src="/home/memery/Documents/kaggle/galaxyzoo_presentation/galaxyzoo/img/galaxyzoo_results.png" alt="Example Galaxy" /></p>
+<ul>
+<li>His single best network outperformed everything else</li>
+</ul>
+</section><section id="things-that-didnt-work" class="slide level2">
+<h1>Things that Didn’t Work</h1>
+<ul>
+<li>Adding Gaussian Noise to the image</li>
+<li>Changing gamma</li>
+<li>Downsampling less</li>
+<li>Adding shearing to preprocessing</li>
+<li>RMSprop or adadelta</li>
+</ul>
+<aside class="notes">
+Attempted to shift to a polar coordinate system but didn’t have enough time.
+</aside>
+</section></section>
+<section><section id="references" class="titleslide slide level1"><h1>References</h1></section><section class="slide level2">
+
+<ol type="1">
+<li>I. Goodfellow, Y. Bengio, and A. Courville, Deep learning. 2016.</li>
+<li>S. Dieleman, K. W. Willett, and J. Dambre, “Rotation-invariant convolutional neural networks for galaxy morphology prediction,” Monthly Notices of the Royal Astronomical Society, vol. 450, no. 2, pp. 1441–1459, Apr. 2015.</li>
+<li>[1]“benanne/kaggle-galaxies,” GitHub. [Online]. Available: <a href="https://github.com/benanne/kaggle-galaxies" class="uri">https://github.com/benanne/kaggle-galaxies</a>. [Accessed: 16-Dec-2016].</li>
+</ol>
+</section></section>
+    </div>
+  </div>
+
+  <script src="index_files/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="index_files/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
