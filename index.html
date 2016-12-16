@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="Matthew Emery" />
-  <meta name="dcterms.date" content="2016-12-15" />
   <title>Galaxy Zoo Competition</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -85,7 +84,7 @@
 <section>
     <h1 class="title">Galaxy Zoo Competition</h1>
     <h2 class="author">Matthew Emery</h2>
-    <h3 class="date">December 15, 2016</h3>
+    <h3 class="date"><a href="https://lstmemery.github.io/kaggle-galaxy-presentation/#/" class="uri">https://lstmemery.github.io/kaggle-galaxy-presentation/#/</a></h3>
 </section>
 
 <section><section id="what-is-galaxy-zoo" class="titleslide slide level1"><h1>What Is Galaxy Zoo?</h1></section><section class="slide level2">
@@ -153,7 +152,7 @@ The site is currently down for maintenance
 <ul>
 <li>Avoided cropping out the object interest by centering with SExtractor (Source Extractor)</li>
 </ul>
-<p><img class="center" src="https://raw.githubusercontent.com/lstmemery/kaggle-galaxy-presentation/master/img/sextractor.png"></p>
+<p><img class="center" src="../img/sextractor.png"></p>
 </section><section id="data-augmentation" class="slide level2">
 <h1>Data Augmentation</h1>
 <p><img src="https://raw.githubusercontent.com/lstmemery/kaggle-galaxy-presentation/master/img/data_augmentation.png" alt="Data Augmentation" /></p>
@@ -168,7 +167,7 @@ The site is currently down for maintenance
 </section><section id="rotational-invariance" class="slide level2">
 <h1>Rotational Invariance</h1>
 <p>
-<img align="left" alt="Data Augmentation" src="https://raw.githubusercontent.com/lstmemery/kaggle-galaxy-presentation/master/img/viewpoint_extraction.png" height="40%" width="40%"> Step 1: Rotate image 45 degrees and flip both images (4 images)<br><br> Step 2: Crop each 67x67 image into 4 overlapping 45x45 images (4x4=16 images)
+<img align="left" alt="Data Augmentation" src="../img/viewpoint_extraction.png" height="40%" width="40%"> Step 1: Rotate image 45 degrees and flip both images (4 images)<br><br> Step 2: Crop each 67x67 image into 4 overlapping 45x45 images (4x4=16 images)
 </p>
 </section></section>
 <section><section id="network-architectures" class="titleslide slide level1"><h1>Network Architectures</h1></section><section id="best-model" class="slide level2">
@@ -181,11 +180,27 @@ The site is currently down for maintenance
 <li>Maxout are like group-wise ReLUs</li>
 <li>The 37 were scaled to their constraints</li>
 </ul>
+</section><section id="variants" class="slide level2">
+<h1>Variants</h1>
+<ul>
+<li>a network with two dense layers instead of three (just one maxout layer);</li>
+<li>a network with one of the dense layers reduced in size and applied individually to each part (resulting in 16-way parameter sharing for this layer as well);</li>
+<li>a network with a different filter size configuration: 8/4/3/3 instead of 6/5/3/3 (from bottom to top);</li>
+<li>a network with centered and rescaled input images;</li>
+<li>a network with a ReLU dense layer instead of maxout;</li>
+<li>a network with 192 filters instead of 128 for the topmost convolutional layer;</li>
+<li>a network with 256 filters instead of 128 for the topmost convolutional layer;</li>
+<li>a network with norm constraint regularisation applied to the two maxout layers;</li>
+<li>combinations of the above variations.</li>
+</ul>
+<aside class="notes">
+The Norm Constrain regularisation was suggested in a Hinton paper from 2012
+</aside>
 </section><section id="training" class="slide level2">
 <h1>Training</h1>
 <ul>
 <li>67(?) hours of training for the best model on a GTX 680</li>
-<li>Nesterov Momentum was used</li>
+<li>Nesterov Momentum was used (16 “minibatches,” effectively 256 because of architecture)</li>
 <li>Learning rate of 0.04 (updated to 0.004 after 18M samples, then 0.0004 after 23M)</li>
 <li>Dropout was used during training to prevent overfitting</li>
 </ul>
@@ -204,8 +219,27 @@ The site is currently down for maintenance
 <ul>
 <li>His single best network outperformed everything else</li>
 </ul>
+</section><section id="things-that-didnt-work" class="slide level2">
+<h1>Things that Didn’t Work</h1>
+<ul>
+<li>Adding Gaussian Noise to the image</li>
+<li>Changing gamma</li>
+<li>Downsampling less</li>
+<li>Adding shearing to preprocessing</li>
+<li>RMSprop or adadelta</li>
+</ul>
+<aside class="notes">
+Attempted to shift to a polar coordinate system but didn’t have enough time.
+</aside>
 </section></section>
-<section><section id="references" class="titleslide slide level1"><h1>References</h1></section></section>
+<section><section id="references" class="titleslide slide level1"><h1>References</h1></section><section class="slide level2">
+
+<ol type="1">
+<li>I. Goodfellow, Y. Bengio, and A. Courville, Deep learning. 2016.</li>
+<li>S. Dieleman, K. W. Willett, and J. Dambre, “Rotation-invariant convolutional neural networks for galaxy morphology prediction,” Monthly Notices of the Royal Astronomical Society, vol. 450, no. 2, pp. 1441–1459, Apr. 2015.</li>
+<li>[1]“benanne/kaggle-galaxies,” GitHub. [Online]. Available: <a href="https://github.com/benanne/kaggle-galaxies" class="uri">https://github.com/benanne/kaggle-galaxies</a>. [Accessed: 16-Dec-2016].</li>
+</ol>
+</section></section>
     </div>
   </div>
 
