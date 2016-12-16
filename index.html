@@ -94,7 +94,7 @@
 <li>All sky galaxy surveys produce more images than can be handled just by experts</li>
 <li>It’s 2011, better crowd-source it</li>
 </ul>
-<p><img src="https://github.com/lstmemery/kaggle-galaxy-presentation/blob/master/img/GalaxyZoo.jpg" alt="Galaxy Zoo Snapshot" /></p>
+<p><img src="https://raw.githubusercontent.com/lstmemery/kaggle-galaxy-presentation/master/img/GalaxyZoo.jpg" alt="Galaxy Zoo Snapshot" /></p>
 <aside class="notes">
 The site is currently down for maintenance
 </aside>
@@ -107,7 +107,7 @@ The site is currently down for maintenance
 </ul>
 </section><section class="slide level2">
 
-<p><img src="https://github.com/lstmemery/kaggle-galaxy-presentation/blob/master/img/galaxy_decision_tree.png" alt="Galaxy Zoo Decision Tree" /></p>
+<p><img src="https://raw.githubusercontent.com/lstmemery/kaggle-galaxy-presentation/master/img/galaxy_decision_tree.png" alt="Galaxy Zoo Decision Tree" /></p>
 </section></section>
 <section><section id="competition-details" class="titleslide slide level1"><h1>Competition Details</h1></section><section id="specifications" class="slide level2">
 <h1>Specifications</h1>
@@ -118,7 +118,7 @@ The site is currently down for maintenance
 <li>424 x 424 pixels</li>
 <li>Prize of $16,000</li>
 </ul>
-<p><img src="https://github.com/lstmemery/kaggle-galaxy-presentation/blob/master/img/262642.jpg" alt="Example Galaxy" /></p>
+<p><img src="https://raw.githubusercontent.com/lstmemery/kaggle-galaxy-presentation/master/img/262642.jpg" alt="Example Galaxy" /></p>
 </section><section id="loss-function" class="slide level2">
 <h1>Loss Function</h1>
 <ul>
@@ -126,7 +126,7 @@ The site is currently down for maintenance
 <li>The answers to the first question should sum to 1</li>
 <li>Answers to the next questions to sum to their parent probability</li>
 </ul>
-<p><img src="https://github.com/lstmemery/kaggle-galaxy-presentation/blob/master/img/RMSE.png" alt="Example Galaxy" /></p>
+<p><img src="https://raw.githubusercontent.com/lstmemery/kaggle-galaxy-presentation/master/img/RMSE.png" alt="Example Galaxy" /></p>
 <ul>
 <li>Note: We are measuring error against the what the crowd answered. A “good” model will have the same biases as the crowd</li>
 </ul>
@@ -153,10 +153,10 @@ The site is currently down for maintenance
 <ul>
 <li>Avoided cropping out the object interest by centering with SExtractor (Source Extractor)</li>
 </ul>
-<p><img class="center" src="https://github.com/lstmemery/kaggle-galaxy-presentation/blob/master/img/sextractor.png"></p>
+<p><img class="center" src="https://raw.githubusercontent.com/lstmemery/kaggle-galaxy-presentation/master/img/sextractor.png"></p>
 </section><section id="data-augmentation" class="slide level2">
 <h1>Data Augmentation</h1>
-<p><img src="https://github.com/lstmemery/kaggle-galaxy-presentation/blob/master/img/data_augmentation.png" alt="Data Augmentation" /></p>
+<p><img src="https://raw.githubusercontent.com/lstmemery/kaggle-galaxy-presentation/master/img/data_augmentation.png" alt="Data Augmentation" /></p>
 <ul>
 <li>Rotating uniformly from 0 to 360</li>
 <li>Translating uniformly -4 pixels to 4 pixels</li>
@@ -168,12 +168,12 @@ The site is currently down for maintenance
 </section><section id="rotational-invariance" class="slide level2">
 <h1>Rotational Invariance</h1>
 <p>
-<img align="left" alt="Data Augmentation" src="https://github.com/lstmemery/kaggle-galaxy-presentation/blob/master/img/viewpoint_extraction.png" height="40%" width="40%"> Step 1: Rotate image 45 degrees and flip both images (4 images)<br><br> Step 2: Crop each 67x67 image into 4 overlapping 45x45 images (4x4=16 images)
+<img align="left" alt="Data Augmentation" src="https://raw.githubusercontent.com/lstmemery/kaggle-galaxy-presentation/master/img/viewpoint_extraction.png" height="40%" width="40%"> Step 1: Rotate image 45 degrees and flip both images (4 images)<br><br> Step 2: Crop each 67x67 image into 4 overlapping 45x45 images (4x4=16 images)
 </p>
 </section></section>
 <section><section id="network-architectures" class="titleslide slide level1"><h1>Network Architectures</h1></section><section id="best-model" class="slide level2">
 <h1>Best Model</h1>
-<p><img src="https://github.com/lstmemery/kaggle-galaxy-presentation/blob/master/img/architecture.png" alt="Best Architecture" height="70%" width="70%"></p>
+<p><img src="https://raw.githubusercontent.com/lstmemery/kaggle-galaxy-presentation/master/img/architecture.png" alt="Best Architecture" height="70%" width="70%"></p>
 <ul>
 <li>All 16 viewpoints are fed in at the same time to maximize parameter sharing</li>
 <li>Best single model has 4 square convolutional layers (6-5-3-3)</li>
@@ -189,7 +189,7 @@ The site is currently down for maintenance
 <li>Learning rate of 0.04 (updated to 0.004 after 18M samples, then 0.0004 after 23M)</li>
 <li>Dropout was used during training to prevent overfitting</li>
 </ul>
-<p><img src="https://github.com/lstmemery/kaggle-galaxy-presentation/blob/master/img/opt2.gif" alt="Momentum" /></p>
+<p><img src="https://raw.githubusercontent.com/lstmemery/kaggle-galaxy-presentation/master/img/opt2.gif" alt="Momentum" /></p>
 </section><section id="model-averaging" class="slide level2">
 <h1>Model Averaging</h1>
 <ul>
@@ -200,7 +200,7 @@ The site is currently down for maintenance
 </ul>
 </section><section id="how-did-he-do" class="slide level2">
 <h1>How Did He Do?</h1>
-<p><img src="https://github.com/lstmemery/kaggle-galaxy-presentation/blob/master/img/galaxyzoo_results.png" alt="Example Galaxy" /></p>
+<p><img src="https://raw.githubusercontent.com/lstmemery/kaggle-galaxy-presentation/master/img/galaxyzoo_results.png" alt="Example Galaxy" /></p>
 <ul>
 <li>His single best network outperformed everything else</li>
 </ul>
