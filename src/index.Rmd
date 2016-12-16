@@ -5,16 +5,23 @@ date: December 15, 2016
 output: 
   revealjs::revealjs_presentation:
     theme: "night"
+    self_contained: false
 ---
 
 # What Is Galaxy Zoo?
 
-----
+
+---
 
  - All sky galaxy surveys produce more images than can be handled just by experts
  - It's 2011, better crowd-source it
 
 ![Galaxy Zoo Snapshot](../img/GalaxyZoo.jpg)
+
+<aside class="notes">
+  The site is currently down for maintenance
+</aside>
+
 
 ## Galaxy Classification
 
@@ -81,7 +88,7 @@ output:
  - Translating uniformly -4 pixels to 4 pixels
  - Scaling log-uniformly from 1.3^-1 to 1.3
  - Flip as a Bernoulli event with probability 0.5
- - Brightness adjustment using an equation in the ImageNet paper
+ - Color perturbation using an equation in the ImageNet paper
  - This is all being done on the CPU while the GPU trains the network
 
 ## Rotational Invariance
@@ -94,19 +101,24 @@ output:
 
 # Network Architectures
 
-![Best Architecture](../img/architecture.png)
+## Best Model
+
+<img src="../img/architecture.png" alt="Best Architecture" height="70%" width="70%">
+
 - All 16 viewpoints are fed in at the same time to maximize parameter sharing
 - Best single model has 4 square convolutional layers (6-5-3-3)
 - More than 100 models were tested, 17 were included in the final ensemble
 - Maxout are like group-wise ReLUs
-- The 37 categories are rescaled to their unconditional probabilities
+- The 37 were scaled to their constraints
 
 ## Training
 
 - 67(?) hours of training for the best model on a GTX 680
-- Nesterov Momentum was used [//]: # Need to research this
+- Nesterov Momentum was used
 - Learning rate of 0.04 (updated to 0.004 after 18M samples, then 0.0004 after 23M)
 - Dropout was used during training to prevent overfitting
+
+![Momentum](../img/opt2.gif)
 
 ## Model Averaging
 
@@ -121,9 +133,8 @@ output:
 
 - His single best network outperformed everything else
 
-# Convolutional Neural Nets
-
-
-
 # References
+
+1. I. Goodfellow, Y. Bengio, and A. Courville, Deep learning. 2016.
+2. S. Dieleman, K. W. Willett, and J. Dambre, “Rotation-invariant convolutional neural networks for galaxy morphology prediction,” Monthly Notices of the Royal Astronomical Society, vol. 450, no. 2, pp. 1441–1459, Apr. 2015.
 
